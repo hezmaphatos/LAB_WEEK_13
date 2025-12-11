@@ -1,0 +1,17 @@
+1. MVVM merupakan arsitektur penting dalam pengembangan aplikasi Android karena memisahkan tampilan UI dari logic aplikasi, sehingga kode menjadi lebih bersih, terstruktur, mudah dikembangkan, dan mudah diuji. 
+
+Dalam MVVM, Model bertanggung jawab terhadap seluruh pengelolaan data, seperti mengambil data dari database Room, API, atau sumber data lain. File yang termasuk Model antara lain Entity (misalnya Movie.kt), DAO (MovieDao.kt), Database (MovieDatabase.kt), Repository (MovieRepository.kt), dan API Service seperti interface Retrofit (MovieService.kt). 
+
+Sementara itu, View adalah bagian yang menampilkan data kepada pengguna dan menerima interaksi pengguna. File‐file pada layer View mencakup Activity, Fragment, XML layout, RecyclerView Adapter, serta BindingAdapter, contohnya MainActivity.kt, MovieAdapter.kt, RecyclerViewBinding.kt, dan layout seperti activity_main.xml.
+
+Terakhir, ViewModel berfungsi sebagai penghubung antara Model dan View dengan mengatur alur data dan logic yang diperlukan UI. File yang termasuk ViewModel adalah kelas seperti MovieViewModel.kt yang berisi LiveData atau Flow untuk dipantau oleh View. Dengan pemisahan peran yang jelas ini, MVVM membuat aplikasi lebih modular dan mudah dirawat.
+
+2. Data Binding lebih efisien dibanding metode normal karena mengurangi kode boilerplate, mempercepat pembaruan UI, dan mengurangi potensi error. Dengan Data Binding, kita tidak perlu lagi memanggil findViewById(), tidak perlu memanggil setter satu-per-satu untuk mengisi UI, dan tidak perlu memanggil adapter.notifyDataSetChanged() secara manual. Data Binding secara otomatis menghubungkan data dari ViewModel atau objek data dengan komponen UI sehingga setiap perubahan data akan langsung muncul di layar tanpa intervensi tambahan.
+
+3. Singleton Pattern penting karena memastikan bahwa sebuah class, seperti Room Database atau Retrofit client, hanya memiliki satu instance selama aplikasi berjalan. Hal ini mencegah pemborosan memori, menghindari konflik akses data, dan membuat performa aplikasi lebih stabil. Dalam konteks Room, jika kita tidak menggunakan Singleton, aplikasi dapat membuat banyak instance database secara tidak sengaja, yang berpotensi menyebabkan crash, race condition, atau operasi database yang tidak konsisten.
+
+4. Repository Pattern penting karena berfungsi sebagai lapisan perantara antara ViewModel dan sumber data (database lokal, API, atau keduanya). Repository menyembunyikan detail bagaimana dan dari mana data diperoleh, sehingga ViewModel tidak perlu tahu apakah data berasal dari network atau Room.
+
+5. Selain WorkManager, ada beberapa cara lain yang dapat digunakan untuk menyegarkan database, tergantung kebutuhan aplikasi. dapat dilakukan refresh data saat pengguna membuka layar (misalnya memanggil API di onResume() atau onStart()), atau menggunakan pull-to-refresh seperti SwipeRefreshLayout agar pengguna bisa memicu update secara manual.
+
+Selain itu, dapat juga digunakan Firebase Realtime Database atau WebSockets jika membutuhkan sinkronisasi data secara real-time. Alternatif lainnya adalah dengan menerapkan lifecycle-aware coroutine/Flow di ViewModel untuk memanggil update setiap kali ada perubahan konektivitas atau event tertentu.
