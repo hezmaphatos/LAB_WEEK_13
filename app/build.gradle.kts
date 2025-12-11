@@ -1,16 +1,19 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    kotlin("kapt")
 }
 
 android {
-    namespace = "com.example.lab_week_13_xx"
-    compileSdk {
-        version = release(36)
+    namespace = "com.example.lab_week_13"
+    compileSdk = 36
+
+    buildFeatures {
+        dataBinding = true
     }
 
     defaultConfig {
-        applicationId = "com.example.lab_week_13_xx"
+        applicationId = "com.example.lab_week_13"
         minSdk = 24
         targetSdk = 36
         versionCode = 1
@@ -38,6 +41,21 @@ android {
 }
 
 dependencies {
+    implementation("androidx.room:room-runtime:2.8.4")
+    implementation("androidx.room:room-ktx:2.8.4")
+    implementation("androidx.work:work-runtime-ktx:2.11.0")
+    implementation("androidx.room:room-paging-android:2.8.4")
+    kapt("androidx.room:room-compiler:2.8.4")
+    implementation(libs.androidx.recyclerview)
+    implementation(libs.glide)
+    implementation(libs.retrofit)
+    implementation(libs.converter.moshi)
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.kotlinx.coroutines.android)
+    kapt(libs.moshi.kotlin.codegen)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
